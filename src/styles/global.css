@@ -34,8 +34,9 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 code {
-  padding: 1rem;
+  padding:0.25rem 0.5rem;
   background-color: #f2f2f2;
+  color: var(--color-icon);
 }
 pre {
   padding: 1rem;
@@ -43,6 +44,9 @@ pre {
 }
 pre > code {
   all: unset;
+}
+ol li{
+  margin-bottom: 1rem;
 }
 
 /** Site Styles **/
@@ -77,6 +81,10 @@ body {
 
 .text-bold {
   font-weight: 700;
+}
+
+.text-no-underline {
+  text-decoration: none;
 }
 
 .layer-base {
@@ -160,20 +168,24 @@ body {
 
 .article,
 .postings {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
   width: 100%;
   height: 100%;
 
-  padding: 3rem;
+  padding: 3rem 3rem 2rem 3rem;
+  overflow-y: scroll;
 
   background: var(--color-accent);
 }
 
+
 .postings__desc {
   font-size: 1.25rem;
-  font-weight: 200;
+  font-weight: 700;
   color: var(--color-text-weak);
   margin-bottom: 2rem;
 }
@@ -185,30 +197,25 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 2rem;
+  gap: 5rem;
 }
 
 a,
 a:visited {
-  letter-spacing: -1px;
   color: var(--color-text-link);
 }
 
 .posting__title {
-  font-weight: 400;
+  font-weight: 700;
   font-size: 1.25rem;
   margin-bottom: 0.25rem;
 }
 
-.article {
-  overflow-y: scroll;
-}
 
 .posting__desc,
 .article p {
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.75;
-  color: var(--color-text-weak);
 }
 
 .article pre,
@@ -216,11 +223,19 @@ a:visited {
   margin-bottom: 2rem;
 }
 
+.article__back{ 
+  vertical-align: middle;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
 
 .title {
+  font-size: 4rem;
+  line-height: 1.25;
   margin-top: 2rem;
 }
 
 .time { 
   font-size: 0.75rem;
+  margin-top:1rem;
 }
