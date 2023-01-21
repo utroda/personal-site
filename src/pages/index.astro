@@ -1,6 +1,13 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import Bio from '../components/Bio.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
+
 ---
 
 <!DOCTYPE html>
@@ -9,26 +16,24 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <div class="bio">
-      <div class="bio__name text-sans">
-        Jared West
-        <div class="bio__image">
-          <img src="headshot.png" alt="Headshot Picture" />
-        </div>
+    <div class="layer-base">
+      <Bio />
+      <div class="postings">
+        <h2 class="postings__desc text-sans">My thoughts on Design Systems & VueJs.</h2>
+        <ul class="postings__list">
+          {
+            posts.map((post) => (
+              <li class="postings__item">
+                <div class="posting__title text-sans">{post.frontmatter.title}</div>
+                <p class="posting__desc">
+                  {post.frontmatter.description} 
+                  <a href={post.url}>Read More&#8230;</a>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <div class="bio__text">
-        <p>Hi, I'm Jared.</p>
-        <p>A design driven front end developer working with Javascript & VueJs.</p>
-        <p>Formally at <span class="text-bold">JumpCloud</span>.</p>
-      </div>
-      <ul class="bio__icons">
-        <li>
-          <a href="#"><img src="linkedin.svg" alt="linkedin logo" /></a>
-        </li>
-        <li>
-          <a href="#"><img src="github.svg" alt="github logo" /></a>
-        </li>
-      </ul>
     </div>
   </body>
 </html>
