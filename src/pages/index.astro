@@ -1,0 +1,34 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <div class="bio">
+      <div class="bio__name text-sans">
+        Jared West
+        <div class="bio__image">
+          <img src="headshot.png" alt="Headshot Picture" />
+        </div>
+      </div>
+      <div class="bio__text">
+        <p>Hi, I'm Jared.</p>
+        <p>A design driven front end developer working with Javascript & VueJs.</p>
+        <p>Formally at <span class="text-bold">JumpCloud</span>.</p>
+      </div>
+      <ul class="bio__icons">
+        <li>
+          <a href="#"><img src="linkedin.svg" alt="linkedin logo" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="github.svg" alt="github logo" /></a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

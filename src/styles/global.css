@@ -1,0 +1,140 @@
+/** Reset **/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+*
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+/** Site Styles **/
+/** font-family: 'IBM Plex Mono', monospace; **/
+:root {
+  --color-primary:#F2F2F2;
+  --color-accent:#FFF;
+
+  --color-icon:#C78024;
+
+  --color-text:#222222;
+  --color-text-link:#0B08BC;
+  --color-text-weak:#7D7D7D;
+}
+
+html, 
+body {
+ width: 100vw;
+ height: 100vh;
+
+ background: var(--color-primary);
+ font-family: 'IBM Plex Mono', monospace;
+ font-size: 16px;
+ color: var(--color-text);
+
+ overflow: hidden;
+}
+
+.text-sans {
+  font-family: 'IBM Plex Sans', monospace;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.bio {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  height: 100%;
+  width: 45vw;
+
+  padding-left: 32vh;
+  padding-right: 1rem;
+
+  background: url('bg-bars.svg') center right;
+  background-repeat: repeat-y;
+}
+
+.bio__name {
+  position: fixed;
+  top: calc(100% + 3vh);
+  right: calc(100% - 30vh);
+
+  font-size: 18vh;
+  letter-spacing: -0.25rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 800;
+
+  transform: rotate(90deg);
+  transform-origin: top right;
+}
+
+.bio__profile {
+  display: flex;
+  padding-left: 10vh;
+}
+
+.bio__text {
+  font-size: 0.825rem;
+  font-size: 200;
+  margin-top: 2rem;
+}
+
+.bio__text p + p {
+  margin-top: 1rem;
+}
+
+
+.bio__icons {
+  list-style: none;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 2rem;
+}
+
+.bio__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 22vh;
+  height: 22vh;
+
+  border: 1rem solid var(--color-primary);
+  border-radius: 100%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
