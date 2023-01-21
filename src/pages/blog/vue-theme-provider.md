@@ -120,12 +120,12 @@ import ThemeProvider from './components/ThemeProvider.vue';
 Awesome we can now switch our theme classes on the root node of our application. 
 
 Using a theme provider component in Vue 3 can provide a number of benefits. One of the main benefits
-is that it allows you to easily anage and apply a consistent theme throughout your application. This
+is that it allows you to easily manage and apply a consistent theme throughout your application. This
 can improve the overall design and user experience.
 
 Another benefit is that it can make it easier to make changes to your theme. For example, if you
 want to change the color scheme of your application, you can simply update the "tokens" in your `themes.css`
 style sheet and the changes will be automatically reflectd throughout your application.
 
-Finally, we now have a single source of truth which means it going to be easier to maintain our code. Because
+Finally, we now have a single source of truth which means it going to be easier to maintain our code, because
 all of the design elements are centralized.
