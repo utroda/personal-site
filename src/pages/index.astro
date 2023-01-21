@@ -14,6 +14,17 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .footer {
+        display: flex;
+        justify-content: center;
+        font-size:0.75rem;
+        text-align: center;
+        margin-top:2rem;
+      }
+
+      .color-text-red { color: red; }
+    </style>
   </head>
   <body>
     <div class="layer-base">
@@ -33,6 +44,7 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
             ))
           }
         </ul>
+        <div class="footer">Made with&nbsp;<span class="color-text-red">&lt;3</span>&nbsp;in the pnw with Astro.</div>
       </div>
     </div>
   </body>
