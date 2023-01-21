@@ -1,6 +1,6 @@
 # Personal Blog
 
-Built with Astro.
+Built with Astro and deployed on Deno.
 
 ## 🧞 Commands
 
