@@ -127,5 +127,5 @@ Another benefit is that it can make it easier to make changes to your theme. For
 want to change the color scheme of your application, you can simply update the "tokens" in your `themes.css`
 style sheet and the changes will be automatically reflectd throughout your application.
 
-Finally, we now have a single source of truth which means it going to be easier to maintain our code, because
+Finally, we now have a single source of truth which means its going to be easier to maintain our code, because
 all of the design elements are centralized.
