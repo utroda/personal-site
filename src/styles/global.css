@@ -1,257 +1,35 @@
-/** Reset **/
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-*
-* {
-  margin: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body {
-  height: 100%;
-}
+@layer base {
+	:root,
+	:root[data-theme="light"] {
+		color-scheme: light;
+		/* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
+		--theme-bg: 0deg 0% 98%;
+		--theme-link: 172deg 18% 41%;
+		--theme-text: 203deg 11% 15%;
+		--theme-accent: 351deg 66% 48%;
+		--theme-accent-2: 0deg 0% 7%;
+		--theme-quote: 351deg 66% 48%;
+	}
 
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
+	:root[data-theme="dark"] {
+		color-scheme: dark;
+		--theme-bg: 210deg 6% 12%;
+		--theme-link: 330deg 49% 67%;
+		--theme-text: 220deg 3% 79%;
+		--theme-accent: 159deg 64% 45%;
+		--theme-accent-2: 0deg 0% 93%;
+		--theme-quote: 102deg 100% 86%;
+	}
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
+	html {
+		@apply scroll-smooth;
+	}
 
-input, button, textarea, select {
-  font: inherit;
-}
-
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
-
-#root, #__next {
-  isolation: isolate;
-}
-
-code {
-  padding:0.25rem 0.5rem;
-  background-color: #f2f2f2;
-  color: var(--color-icon);
-}
-pre {
-  padding: 1rem;
-  min-height: 300px;
-}
-pre > code {
-  all: unset;
-}
-ol li{
-  margin-bottom: 1rem;
-}
-
-h3 {
-  margin:1rem 0;
-}
-
-blockquote {
-  background: var(--color-primary);
-  padding:0.5rem;
-  border-radius: 0.25rem;
-  margin-bottom:1rem;
-}
-
-.article blockquote p {
-  font-size: 0.875rem;
-  margin: 0;
-}
-
-/** Site Styles **/
-/** font-family: 'IBM Plex Mono', monospace; **/
-:root {
-  --color-primary:#F2F2F2;
-  --color-accent:#FFF;
-
-  --color-icon:#C78024;
-
-  --color-text:#222222;
-  --color-text-link:#0B08BC;
-  --color-text-weak:#7D7D7D;
-}
-
-html, 
-body {
- width: 100vw;
- height: 100vh;
-
- background: var(--color-primary);
- font-family: 'IBM Plex Mono', monospace;
- font-size: 16px;
- color: var(--color-text);
-
- overflow: hidden;
-}
-
-.text-sans {
-  font-family: 'IBM Plex Sans', monospace;
-}
-
-.text-bold {
-  font-weight: 700;
-}
-
-.text-no-underline {
-  text-decoration: none;
-}
-
-.layer-base {
-  display: flex;
-
-  width: 100%;
-  height: 100%;
-}
-
-.bio {
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  height: 100%;
-  width: 55vw;
-
-  padding-left: 32vh;
-  padding-right: 1rem;
-
-  background: url('/bg-bars.svg') center right;
-  background-repeat: repeat-y;
-}
-
-.bio__name {
-  position: fixed;
-  top: calc(100% + 3vh);
-  right: calc(100% - 30vh);
-
-  font-size: 18vh;
-  letter-spacing: -0.25rem;
-  white-space: nowrap;
-  text-transform: uppercase;
-  font-weight: 800;
-
-  transform: rotate(90deg);
-  transform-origin: top right;
-}
-
-.bio__profile {
-  display: flex;
-  padding-left: 10vh;
-}
-
-.bio__text {
-  font-size: 0.825rem;
-  font-size: 200;
-  margin-top: 2rem;
-}
-
-.bio__text p + p {
-  margin-top: 1rem;
-}
-
-
-.bio__icons {
-  list-style: none;
-  padding: 0;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-
-  margin-top: 2rem;
-}
-
-.bio__image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  width: 22vh;
-  height: 22vh;
-
-  border: 1rem solid var(--color-primary);
-  border-radius: 100%;
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
-
-.article,
-.postings {
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  height: 100%;
-
-  padding: 3rem 3rem 2rem 3rem;
-  overflow-y: scroll;
-
-  background: var(--color-accent);
-}
-
-
-.postings__desc {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text-weak);
-  margin-bottom: 2rem;
-}
-
-.postings__list {
-  list-style: none;
-  padding:0;
-
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 5rem;
-}
-
-a,
-a:visited {
-  color: var(--color-text-link);
-}
-
-.posting__title {
-  font-weight: 700;
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
-}
-
-
-.posting__desc,
-.article p {
-  font-size: 1.125rem;
-  line-height: 1.75;
-}
-
-.article pre,
-.article p {
-  margin-bottom: 2rem;
-}
-
-.article__back{ 
-  vertical-align: middle;
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
-
-.title {
-  font-size: 4rem;
-  line-height: 1.25;
-  margin-top: 2rem;
-}
-
-.time { 
-  font-size: 0.75rem;
-  margin-top:1rem;
+	body {
+		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 text-sm font-normal text-textColor antialiased;
+	}
 }
