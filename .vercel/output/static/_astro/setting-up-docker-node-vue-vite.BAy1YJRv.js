@@ -1,4 +1,4 @@
-import{c as t,r as o,m as i}from"./render-template.BVo8AAGU.js";import{u as r}from"./hoisted.BIJTGH-a.js";import"./astro/assets-service.DcMRmNXG.js";const n=`<p>We will be working out of a Mono Repo using NPM.</p>
+import{c as t,r as o,m as i}from"./render-template.Cc8N62nc.js";import{u as r}from"./hoisted.CzQnbSJV.js";import"./astro/assets-service.DcMRmNXG.js";const n=`<p>We will be working out of a Mono Repo using NPM.</p>
 <p>Creating folder for vue/node - create docker compose file, create nginx file</p>
 <p>Adding content to docker compose file</p>
 <p>Adding content to nginx file</p>
