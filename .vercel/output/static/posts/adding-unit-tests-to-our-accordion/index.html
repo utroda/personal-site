@@ -1,25 +1,72 @@
-import{s as c,g as y}from"./_astro_assets.Bm3DAGIZ.js";import{c as d,r,m as E}from"./render-template.Cc8N62nc.js";import{u}from"./hoisted.CzQnbSJV.js";import"./astro/assets-service.DcMRmNXG.js";const h={src:"/_astro/unit-test-output.DnLdmPKD.png",width:2066,height:1298,format:"png"},v=async function(a){const s={};{const p=new RegExp('__ASTRO_IMAGE_="([^"]*src/assets/unit-test-output\\.png[^"]*)"',"g");let t,e=0;for(;(t=p.exec(a))!==null;){const n="src/assets/unit-test-output.png_"+e,F=JSON.parse(t[1].replace(/&#x22;/g,'"')),{src:l,...o}=F;s[n]=await y({src:h,...o}),e++}}return s};async function C(a){return v(a).then(s=>a.replaceAll(/__ASTRO_IMAGE_="([^"]+)"/gm,(p,t)=>{const e=JSON.parse(t.replace(/&#x22;/g,'"')),n=e.src+"_"+e.index;s[n].srcSet&&s[n].srcSet.values.length>0&&(s[n].attributes.srcset=s[n].srcSet.attribute);const{index:F,...l}=s[n].attributes;return c({src:s[n].src,...l})}))}const i=await C(`<blockquote>
+<!DOCTYPE html><html lang="en-GB"> <head><meta charset="utf-8"> <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"> <meta content="IE=edge" http-equiv="X-UA-Compatible"> <title>Writing Unit Tests with Vue Test Utils and Vitest (Part 2) • Developer Notes By Jared West</title>  <link href="/favicon.ico" rel="icon" sizes="any"> <link href="/icon.svg" rel="icon" type="image/svg+xml"> <link href="/apple-touch-icon.png" rel="apple-touch-icon"> <link href="/manifest.webmanifest" rel="manifest"> <link href="https://outwest.dev/posts/adding-unit-tests-to-our-accordion/" rel="canonical">  <meta content="Writing Unit Tests with Vue Test Utils and Vitest (Part 2) • Developer Notes By Jared West" name="title"> <meta content="Let's add unit tests to our accordion component, using Vue Test Utils and Vitest." name="description"> <meta content="Jared West" name="author">  <meta content="" name="theme-color">  <meta content="article" property="og:type"> <meta content="Writing Unit Tests with Vue Test Utils and Vitest (Part 2)" property="og:title"> <meta content="Let's add unit tests to our accordion component, using Vue Test Utils and Vitest." property="og:description"> <meta content="https://outwest.dev/posts/adding-unit-tests-to-our-accordion/" property="og:url"> <meta content="Developer Notes By Jared West" property="og:site_name"> <meta content="en_GB" property="og:locale"> <meta content="https://outwest.dev/og-image/adding-unit-tests-to-our-accordion.png" property="og:image"> <meta content="1200" property="og:image:width"> <meta content="630" property="og:image:height">  <meta content="Jared West" property="article:author"> <meta content="2024-03-01T08:00:00.000Z" property="article:published_time">   <meta content="summary_large_image" property="twitter:card"> <meta content="https://outwest.dev/posts/adding-unit-tests-to-our-accordion/" property="twitter:url"> <meta content="Writing Unit Tests with Vue Test Utils and Vitest (Part 2)" property="twitter:title"> <meta content="Let's add unit tests to our accordion component, using Vue Test Utils and Vitest." property="twitter:description"> <meta content="https://outwest.dev/og-image/adding-unit-tests-to-our-accordion.png" property="twitter:image">  <link href="/sitemap-index.xml" rel="sitemap">  <link href="/rss.xml" rel="alternate" title="Developer Notes By Jared West" type="application/rss+xml">   <link href="https://webmention.io/astro-cactus.chriswilliams.dev/webmention" rel="webmention">  <meta content="Astro v4.2.4" name="generator"><link rel="stylesheet" href="/_astro/_slug_.BwHWYoJN.css" /><script type="module" src="/_astro/hoisted.Bv27FeId.js"></script>
+<script type="module" src="/_astro/page.55INgWwS.js"></script></head> <body> <script>
+	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
+
+	function getUserPref() {
+		const storedTheme = typeof localStorage !== "undefined" && localStorage.getItem("theme");
+		return storedTheme || (lightModePref.matches ? "light" : "dark");
+	}
+
+	function setTheme(newTheme) {
+		if (newTheme !== "light" && newTheme !== "dark") {
+			return console.warn(
+				`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`,
+			);
+		}
+
+		const root = document.documentElement;
+
+		// root already set to newTheme, exit early
+		if (newTheme === root.getAttribute("data-theme")) {
+			return;
+		}
+
+		root.setAttribute("data-theme", newTheme);
+
+		const colorThemeMetaTag = document.querySelector("meta[name='theme-color']");
+		const bgColour = getComputedStyle(document.body).getPropertyValue("--theme-bg");
+		colorThemeMetaTag.setAttribute("content", `hsl(${bgColour})`);
+		if (typeof localStorage !== "undefined") {
+			localStorage.setItem("theme", newTheme);
+		}
+	}
+
+	// initial setup
+	setTheme(getUserPref());
+
+	// View Transitions hook to restore theme
+	document.addEventListener("astro:after-swap", () => setTheme(getUserPref()));
+
+	// listen for theme-change custom event, fired in src/components/ThemeToggle.astro
+	document.addEventListener("theme-change", (e) => {
+		setTheme(e.detail.theme);
+	});
+
+	// listen for prefers-color-scheme change.
+	lightModePref.addEventListener("change", (e) => setTheme(e.matches ? "light" : "dark"));
+</script> <a class="sr-only focus:not-sr-only focus:fixed focus:start-1 focus:top-1.5" href="#main">skip to content
+</a> <header class="group relative mb-10 flex items-center" id="main-header"> <div class="flex sm:flex-col"> <a class="inline-flex grayscale hover:filter-none sm:relative sm:inline-block" href="/"> <span class="text-xl font-bold sm:text-2xl">Developer Notes</span> </a> <nav aria-label="Main menu" class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-bgColor/[.85] py-4 text-accent shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:items-center sm:divide-x sm:divide-dashed sm:divide-accent sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none" id="navigation-menu"> <a class="px-4 py-4 sm:py-0 sm:hover:underline" data-astro-prefetch href="/"> Home </a><a class="px-4 py-4 sm:py-0 sm:hover:underline" data-astro-prefetch href="/posts/"> Blog </a> </nav> </div> <theme-toggle class="ml-auto sm:ml-auto"> <button class="relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2" type="button"> <span class="sr-only">Dark Theme</span> <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0" fill="none" focusable="false" id="sun-svg" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100" fill="none" focusable="false" id="moon-svg" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M0 0h24v24H0z" fill="none" stroke="none"></path> <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path> <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path> <path d="M19 11h2m-1 -1v2"></path> </svg> </button> </theme-toggle>  <mobile-button> <button aria-expanded="false" aria-haspopup="menu" aria-label="Open main menu" class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden" id="toggle-navigation-menu" type="button"> <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0" fill="none" focusable="false" id="line-svg" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100" class="text-accent" fill="none" focusable="false" id="cross-svg" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button> </mobile-button> </header>  <main id="main">  <div class="gap-x-10 lg:flex lg:items-start"> <aside class="sticky top-20 order-2 -me-32 hidden basis-64 lg:block"> <h2 class="font-semibold">Table of Contents</h2> <ul class="mt-4 text-xs"> <li class=""> <a aria-label="Scroll to section: Setting Up The Test File" class="block line-clamp-2 hover:text-accent mt-3" href="#setting-up-the-test-file"><span class="me-0.5">#</span>Setting Up The Test File</a> <ul> <li class="ms-2"> <a aria-label="Scroll to section: Setting up defaults" class="block line-clamp-2 hover:text-accent mt-2 text-[0.6875rem]" href="#setting-up-defaults"><span class="me-0.5">#</span>Setting up defaults</a>  </li><li class="ms-2"> <a aria-label="Scroll to section: Render Testing" class="block line-clamp-2 hover:text-accent mt-2 text-[0.6875rem]" href="#render-testing"><span class="me-0.5">#</span>Render Testing</a>  </li><li class="ms-2"> <a aria-label="Scroll to section: Behavior Testing" class="block line-clamp-2 hover:text-accent mt-2 text-[0.6875rem]" href="#behavior-testing"><span class="me-0.5">#</span>Behavior Testing</a>  </li><li class="ms-2"> <a aria-label="Scroll to section: A11y Testing" class="block line-clamp-2 hover:text-accent mt-2 text-[0.6875rem]" href="#a11y-testing"><span class="me-0.5">#</span>A11y Testing</a>  </li> </ul> </li><li class=""> <a aria-label="Scroll to section: Conclusion" class="block line-clamp-2 hover:text-accent mt-3" href="#conclusion"><span class="me-0.5">#</span>Conclusion</a>  </li> </ul> </aside> <article class="flex-grow break-words" data-pagefind-body> <div id="blog-hero"><h1 class="title mb-3 sm:mb-1"> Writing Unit Tests with Vue Test Utils and Vitest (Part 2) </h1> <div class="flex flex-wrap items-center gap-x-3 gap-y-2"> <p class="font-semibold"> <time datetime="2024-03-01T08:00:00.000Z"> 1 March 2024 </time> /  7 min read </p>  </div> <div class="mt-3"> <svg aria-hidden="true" class="me-1 inline-block h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M0 0h24v24H0z" fill="none" stroke="none"></path> <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path> <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path> <path d="M6 9h-.01"></path> </svg>  <a aria-label="View more blogs with the tag vue" class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href="/tags/vue/">vue</a>,  <a aria-label="View more blogs with the tag unit testing" class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href="/tags/unit testing/">unit testing</a>,  <a aria-label="View more blogs with the tag testing" class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href="/tags/testing/">testing</a>,  <a aria-label="View more blogs with the tag vue test utils" class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href="/tags/vue test utils/">vue test utils</a>,  <a aria-label="View more blogs with the tag vitest" class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href="/tags/vitest/">vitest</a> </div></div> <div class="prose prose-cactus mt-12 prose-headings:font-semibold prose-headings:-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">  <blockquote>
 <p>This is Part 2 of our series on the “TheAccordion”. If you haven’t seen <a href="">Part 1</a> please start there.</p>
 </blockquote>
 <p>In this post, we’re focusing on unit testing our “TheAccordion” component using Vitest and Vue Test Utils. We’ll walk through setting up a test file and writing tests for general rendering and keyboard navigation. Let’s dive right in!</p>
 <h2 id="setting-up-the-test-file">Setting Up The Test File</h2>
 <p>First, let’s create a file named <code>TheAccordion.spec.js</code>. We’ll start by importing Vitest, <code>shallowMount</code> from Vue Test Utils, and then our component.</p>
-<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.kq0fl.css"><script type="module" src="/_astro/ec.sgewm.js"><\/script><figure class="frame has-title"><figcaption class="header"><span class="title">TheAccordion.spec.js</span></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">import</span><span style="--0:#24292E;--1:#F8F8F2"> { describe, it, expect, beforeEach } </span><span style="--0:#BF3441;--1:#FF79C6">from</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">vitest</span><span style="--0:#032F62;--1:#E9F284">'</span></div><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">import</span><span style="--0:#24292E;--1:#F8F8F2"> { shallowMount } </span><span style="--0:#BF3441;--1:#FF79C6">from</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">@vue/test-utils</span><span style="--0:#032F62;--1:#E9F284">'</span></div><div class="ec-line">
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.kq0fl.css"><script type="module" src="/_astro/ec.sgewm.js"></script><figure class="frame has-title"><figcaption class="header"><span class="title">TheAccordion.spec.js</span></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">import</span><span style="--0:#24292E;--1:#F8F8F2"> { describe, it, expect, beforeEach } </span><span style="--0:#BF3441;--1:#FF79C6">from</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">vitest</span><span style="--0:#032F62;--1:#E9F284">'</span></div><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">import</span><span style="--0:#24292E;--1:#F8F8F2"> { shallowMount } </span><span style="--0:#BF3441;--1:#FF79C6">from</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">@vue/test-utils</span><span style="--0:#032F62;--1:#E9F284">'</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">import</span><span style="--0:#24292E;--1:#F8F8F2"> TheAccordion </span><span style="--0:#BF3441;--1:#FF79C6">from</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">../TheAccordion.vue</span><span style="--0:#032F62;--1:#E9F284">'</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="import { describe, it, expect, beforeEach } from &#x27;vitest&#x27;import { shallowMount } from &#x27;@vue/test-utils&#x27;import TheAccordion from &#x27;../TheAccordion.vue&#x27;"><div></div></button></div></figure></div>
-<p>At this point you might ask why choose <code>shallowMount</code> over <code>mount</code>. Shallow mounting renders only the target component, without mounting its child components. This approach helps keep tests focused and efficient, as it reduces unnecessary complexity and improves test performance. By isolating the component under test, <code>shallowMount</code> allows for more targeted and straightforward unit tests, resulting in clearer and more maintainable testing suites. This isn’t so apparent with a single test like in our example here, but in a production enviorment where you might have hundreds of tests the speed gains will be noticable.</p>
+<p>At this point, you might ask why choose <code>shallowMount</code> over <code>mount</code>. Shallow mounting renders only the target component, without mounting its child components. This approach helps keep tests focused and efficient, as it reduces unnecessary complexity and improves test performance. By isolating the component under test, <code>shallowMount</code> allows for more targeted and straightforward unit tests, resulting in clearer and more maintainable testing suites. This isn’t so apparent with a single test like in our example here, but in a production environment where you might have hundreds of tests, the speed gains will be noticeable.</p>
 <h3 id="setting-up-defaults">Setting up defaults</h3>
 <div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#BF3441;--1:#FF79C6">const</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#6F42C1;--1:#50FA7B">defaultProps</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> ({</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  sections</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> [</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    { slug</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">s1</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, heading</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Section 1</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, content</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Content 1</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2"> },</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    { slug</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">s2</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, heading</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Section 2</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, content</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Content 2</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2"> },</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    { slug</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">s3</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, heading</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Section 3</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, content</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Content 3</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2"> },</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  ],</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">});</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="const defaultProps = () => ({  sections: [    { slug: &#x27;s1&#x27;, heading: &#x27;Section 1&#x27;, content: &#x27;Content 1&#x27; },    { slug: &#x27;s2&#x27;, heading: &#x27;Section 2&#x27;, content: &#x27;Content 2&#x27; },    { slug: &#x27;s3&#x27;, heading: &#x27;Section 3&#x27;, content: &#x27;Content 3&#x27; },  ],});"><div></div></button></div></figure></div>
-<p>By setting up our <code>defaultProps</code> as a method that returns an object, we will create a fresh copy of the <code>propsData</code> for each test. This allows test cases to modify a new object when nescessary to test how the component behaves for different props.</p>
-<p>So now lets define our suite and setup a reusable render method that we can use.</p>
+<p>By setting up our <code>defaultProps</code> as a method that returns an object, we will create a fresh copy of the <code>propsData</code> for each test. This allows test cases to modify a new object when necessary to test how the component behaves for different props.</p>
+<p>So now let’s define our suite and set up a reusable render method that we can use.</p>
 <div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#6F42C1;--1:#50FA7B">describe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">TheAccordion</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper;</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> vm;</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">const</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#6F42C1;--1:#50FA7B">render</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> (</span><span style="--0:#AE4B07;--1:#FFB86C;--1fs:italic">props</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> {}) </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    wrapper </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#6F42C1;--1:#50FA7B">shallowMount</span><span style="--0:#24292E;--1:#F8F8F2">(TheAccordion, {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      attachTo</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> document.body,</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      propsData</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> { </span><span style="--0:#BF3441;--1:#FF79C6">...</span><span style="--0:#6F42C1;--1:#50FA7B">defaultProps</span><span style="--0:#24292E;--1:#F8F8F2">(), </span><span style="--0:#BF3441;--1:#FF79C6">...</span><span style="--0:#24292E;--1:#F8F8F2">props },</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    });</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    vm </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper.vm;</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  }</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#6F42C1;--1:#50FA7B">beforeEach</span><span style="--0:#24292E;--1:#F8F8F2">(() </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    </span><span style="--0:#6F42C1;--1:#50FA7B">render</span><span style="--0:#24292E;--1:#F8F8F2">();</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  });</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">});</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="describe(&#x27;TheAccordion&#x27;, () => {  let wrapper;  let vm;  const render = (props = {}) => {    wrapper = shallowMount(TheAccordion, {      attachTo: document.body,      propsData: { ...defaultProps(), ...props },    });    vm = wrapper.vm;  }  beforeEach(() => {    render();  });});"><div></div></button></div></figure></div>
-<p>As you can see we’ve now setup our suite of tests called <code>TheAccordion</code> all of our other tests will be children of this initial suite setup by the <code>describe</code> method.</p>
-<p>Let’s talk about the <code>render</code> method. This method mounts the component, sets the wrapper and if necessary gets a refernce to the view model. This method takes a single parameter thats an object. Callers can use this parameter to specify custom options to override the default values.</p>
-<p>Notice the use of <code>attachTo</code> property, this is needed when using <code>shallowMount</code> to bind our events and to get <code>isVisible</code> to have the correct output. See <a href="https://test-utils.vuejs.org/api/#isVisible" rel="nofollow, noopener, noreferrer" target="_blank">isVisible from the test utils docs</a>.</p>
+<p>As you can see, we’ve now set up our suite of tests called <code>TheAccordion</code>. All of our other tests will be children of this initial suite set up by the <code>describe</code> method.</p>
+<p>Let’s talk about the <code>render</code> method. This method mounts the component, sets the wrapper, and if necessary gets a reference to the view model. This method takes a single parameter that’s an object. Callers can use this parameter to specify custom options to override the default values.</p>
+<p>Notice the use of the <code>attachTo</code> property; this is needed when using <code>shallowMount</code> to bind our events and to ensure <code>isVisible</code> has the correct output. See <a href="https://test-utils.vuejs.org/api/#isVisible" rel="nofollow, noopener, noreferrer" target="_blank">isVisible from the test utils docs</a>.</p>
 <p>We then leverage <code>beforeEach</code> so we don’t have to call <code>render()</code> within each test.</p>
 <h3 id="render-testing">Render Testing</h3>
-<p>Now that we have the base of our test file setup, lets write the first batch of tests. We will leverage <code>describe</code> again and build a nested suite of render tests. The rendering suite will test the rendered output of the component, ensuring that the data is fetched when it is mounted, and that the data returned is accurately displayed in the components UI.</p>
+<p>Now that we have the base of our test file set up, let’s write the first batch of tests. We will leverage <code>describe</code> again and build a nested suite of render tests. The rendering suite will test the rendered output of the component, ensuring that the data is fetched when it is mounted and that the data returned is accurately displayed in the component’s UI.</p>
 <div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#6F42C1;--1:#50FA7B">describe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">TheAccordion</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper;</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> vm</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#616972;--1:#96A1C2">// ... render and beforeEach</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#6F42C1;--1:#50FA7B">describe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Rendering</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line">
@@ -32,12 +79,12 @@ import{s as c,g as y}from"./_astro_assets.Bm3DAGIZ.js";import{c as d,r,m as E}fr
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    </span><span style="--0:#6F42C1;--1:#50FA7B">it</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">should render with an initial opened section</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, </span><span style="--0:#BF3441;--1:#FF79C6">async</span><span style="--0:#24292E;--1:#F8F8F2"> () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#6F42C1;--1:#50FA7B">render</span><span style="--0:#24292E;--1:#F8F8F2">({ initialOpen</span><span style="--0:#24292E;--1:#FF79C6">:</span><span style="--0:#24292E;--1:#F8F8F2"> </span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">s2</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2"> });</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#BF3441;--1:#FF79C6">await</span><span style="--0:#24292E;--1:#F8F8F2"> vm.</span><span style="--0:#6F42C1;--1:#50FA7B">$nextTick</span><span style="--0:#24292E;--1:#F8F8F2">();</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#BF3441;--1:#FF79C6">const</span><span style="--1:#F8F8F2"><span style="--0:#24292E"> </span><span style="--0:#005CC5">panels</span><span style="--0:#24292E"> </span></span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper.</span><span style="--0:#6F42C1;--1:#50FA7B">findAll</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">.accordion-panel</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">);</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#6F42C1;--1:#50FA7B">expect</span><span style="--0:#24292E;--1:#F8F8F2">(panels.</span><span style="--0:#6F42C1;--1:#50FA7B">at</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#005CC5;--1:#BD93F9">1</span><span style="--0:#24292E;--1:#F8F8F2">).</span><span style="--0:#6F42C1;--1:#50FA7B">isVisible</span><span style="--0:#24292E;--1:#F8F8F2">()).</span><span style="--0:#6F42C1;--1:#50FA7B">toBe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#005CC5;--1:#BD93F9">true</span><span style="--0:#24292E;--1:#F8F8F2">);</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    });</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  });</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">});</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="describe(&#x27;TheAccordion&#x27;, () => {  let wrapper;  let vm  // ... render and beforeEach  describe(&#x27;Rendering&#x27;, () => {    it(&#x27;renders properly&#x27;, () => {      const group = wrapper.find(&#x27;[data-test-id=&#x22;accordion-group&#x22;]&#x27;);      const sections = wrapper.findAll(&#x27;.accordion&#x27;);      expect(group.exists()).toBe(true);      expect(sections.length).toBe(3);    })    it(&#x27;should have the correct number of panels&#x27;, () => {      const panels = wrapper.findAll(&#x27;.accordion-panel&#x27;);      expect(panels.length).toBe(3);    })    it(&#x27;should have the correct number of buttons&#x27;, () => {      const buttons = wrapper.findAll(&#x27;.accordion-button&#x27;);      expect(buttons.length).toBe(3);    })    it(&#x27;should render the correct heading element&#x27;, () => {      render({ headingAs: &#x27;h2&#x27; });      const headings = wrapper.findAll(&#x27;h2&#x27;);      expect(headings.length).toBe(3);    })    it(&#x27;should render with an initial opened section&#x27;, async () => {      render({ initialOpen: &#x27;s2&#x27; });      await vm.$nextTick();      const panels = wrapper.findAll(&#x27;.accordion-panel&#x27;);      expect(panels.at(1).isVisible()).toBe(true);    });  });});"><div></div></button></div></figure></div>
-<p>The tests we’ve just included should encompass all the rendering states of our component. It’s worth noting the use of await vm.$nextTick() in the test for the initially opened section. This step is essential because it ensures we wait for the DOM to update and render the initial section as opened, guaranteeing accurate test results.</p>
-<p>You can also see how we can override default props by using the <code>render</code> method we setup eariler.</p>
+<p>The tests we’ve just included should encompass all the rendering states of our component. It’s worth noting the use of <code>await vm.$nextTick()</code> in the test for the initially opened section. This step is essential because it ensures we wait for the DOM to update and render the initial section as opened, guaranteeing accurate test results.</p>
+<p>You can also see how we can override default props by using the <code>render</code> method we set up earlier.</p>
 <h3 id="behavior-testing">Behavior Testing</h3>
-<p>Let’s start testing the behavior of our component now. When we first start writing tests it can be hard to know what to test. A good rule to go by is we want to test the <em>external</em> behavior of the component, <em>not</em> the internal imlementation.</p>
-<p>This means in the following tests events are triggered and the test will verify that the actions are handled properly. We don’t want to call internal method directly like <code>toggleSelectedPanel</code>. If the method name get changed, or the params change it could break our tests.</p>
-<p>In the test below, you’ll observe multiple nested describe blocks. This organizational structure enhances the clarity and organization of our test output, making it easier to understand and debug.</p>
+<p>Let’s start testing the behavior of our component now. When we first start writing tests, it can be hard to know what to test. A good rule to go by is that we want to test the <em>external</em> behavior of the component, <em>not</em> the internal implementation.</p>
+<p>This means in the following tests events are triggered, and the test will verify that the actions are handled properly. We don’t want to call internal methods directly like <code>toggleSelectedPanel</code>. If the method name gets changed, or the params change, it could break our tests.</p>
+<p>In the test below, you’ll observe multiple nested <code>describe</code> blocks. This organizational structure enhances the clarity and organization of our test output, making it easier to understand and debug.</p>
 <div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#616972;--1:#96A1C2">// ... render tests and previous code</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#6F42C1;--1:#50FA7B">describe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">Behavior</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">, () </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> panel;</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#BF3441;--1:#FF79C6">let</span><span style="--0:#24292E;--1:#F8F8F2"> button;</span></div><div class="ec-line">
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  </span><span style="--0:#6F42C1;--1:#50FA7B">beforeEach</span><span style="--0:#24292E;--1:#F8F8F2">(() </span><span style="--0:#BF3441;--1:#FF79C6">=></span><span style="--0:#24292E;--1:#F8F8F2"> {</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    panel </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper.</span><span style="--0:#6F42C1;--1:#50FA7B">find</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">.accordion-panel</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">);</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    button </span><span style="--0:#BF3441;--1:#FF79C6">=</span><span style="--0:#24292E;--1:#F8F8F2"> wrapper.</span><span style="--0:#6F42C1;--1:#50FA7B">find</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">.accordion-button</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">);</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  })</span></div><div class="ec-line">
@@ -84,283 +131,7 @@ import{s as c,g as y}from"./_astro_assets.Bm3DAGIZ.js";import{c as d,r,m as E}fr
 </div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#6F42C1;--1:#50FA7B">expect</span><span style="--0:#24292E;--1:#F8F8F2">(button.</span><span style="--0:#6F42C1;--1:#50FA7B">attributes</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">aria-expanded</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">)).</span><span style="--0:#6F42C1;--1:#50FA7B">toBe</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">true</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">);</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">      </span><span style="--0:#6F42C1;--1:#50FA7B">expect</span><span style="--0:#24292E;--1:#F8F8F2">(panel.</span><span style="--0:#6F42C1;--1:#50FA7B">attributes</span><span style="--0:#24292E;--1:#F8F8F2">(</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#032F62;--1:#F1FA8C">hidden</span><span style="--0:#032F62;--1:#E9F284">'</span><span style="--0:#24292E;--1:#F8F8F2">)).not.</span><span style="--0:#6F42C1;--1:#50FA7B">toBeDefined</span><span style="--0:#24292E;--1:#F8F8F2">();</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">    })</span></div><div class="ec-line"><span style="--0:#24292E;--1:#F8F8F2">  })</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="// ... all our previous tests - we are nested within the behavior suite of tests  describe(&#x27;a11y&#x27;, () => {    it(&#x27;should have the correct aria attributes&#x27;, () => {      expect(button.attributes(&#x27;aria-expanded&#x27;)).toBe(&#x27;false&#x27;);      expect(panel.attributes(&#x27;hidden&#x27;)).toBeDefined();    })    it(&#x27;should update the aria attributes when the panel is shown&#x27;, async () => {      await button.trigger(&#x27;pointerup&#x27;);      expect(button.attributes(&#x27;aria-expanded&#x27;)).toBe(&#x27;true&#x27;);      expect(panel.attributes(&#x27;hidden&#x27;)).not.toBeDefined();    })  })"><div></div></button></div></figure></div>
 <h2 id="conclusion">Conclusion</h2>
 <p>With the completion of our test suite for the component, it’s time to put it to the test. Let’s run the suite and verify that all our tests pass without any issues!</p>
-<img __ASTRO_IMAGE_="{&#x22;src&#x22;:&#x22;src/assets/unit-test-output.png&#x22;,&#x22;alt&#x22;:&#x22;unit test output&#x22;,&#x22;index&#x22;:0}">
+<img  src="/_astro/unit-test-output.DnLdmPKD_fruez.webp" alt="unit test output" width="2066" height="1298" loading="lazy" decoding="async">
 <p>This wraps up the unit testing for <code>TheAccordion</code> component, and should provide a good base for setting up tests with Vitest and Vue Test Utils.</p>
-<p><a href="https://github.com/utroda/the-accordion" rel="nofollow, noopener, noreferrer" target="_blank">View Repo With Source</a></p>`),g={title:"Writing Unit Tests with Vue Test Utils and Vitest (Part 2)",description:"Let's add unit tests to our accordion component, using Vue Test Utils and Vitest.",publishDate:"01 Mar 2024",tags:["Vue","Unit Testing","Testing","Vue Test Utils","Vitest"],draft:!0,minutesRead:"7 min read"},B="/Users/utroda/github/personal-site/src/content/post/adding-unit-tests-to-our-accordion.md",b=void 0;function m(){return`
-> This is Part 2 of our series on the "TheAccordion". If you haven't seen [Part 1]() please start there.
-
-In this post, we're focusing on unit testing our "TheAccordion" component using Vitest and Vue Test Utils. We'll walk through setting up a test file and writing tests for general rendering and keyboard navigation. Let's dive right in!
-
-## Setting Up The Test File
-
-First, let's create a file named \`TheAccordion.spec.js\`. We'll start by importing Vitest, \`shallowMount\` from Vue Test Utils, and then our component.
-
-\`\`\`js title="TheAccordion.spec.js"
-
-import { describe, it, expect, beforeEach } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
-
-import TheAccordion from '../TheAccordion.vue'
-\`\`\`
-At this point you might ask why choose \`shallowMount\` over \`mount\`. Shallow mounting renders only the target component, without mounting its child components. This approach helps keep tests focused and efficient, as it reduces unnecessary complexity and improves test performance. By isolating the component under test, \`shallowMount\` allows for more targeted and straightforward unit tests, resulting in clearer and more maintainable testing suites. This isn't so apparent with a single test like in our example here, but in a production enviorment where you might have hundreds of tests the speed gains will be noticable.
-
-### Setting up defaults
-
-\`\`\`js
-const defaultProps = () => ({
-  sections: [
-    { slug: 's1', heading: 'Section 1', content: 'Content 1' },
-    { slug: 's2', heading: 'Section 2', content: 'Content 2' },
-    { slug: 's3', heading: 'Section 3', content: 'Content 3' },
-  ],
-});
-\`\`\`
-
-By setting up our \`defaultProps\` as a method that returns an object, we will create a fresh copy of the \`propsData\` for each test. This allows test cases to modify a new object when nescessary to test how the component behaves for different props.
-
-So now lets define our suite and setup a reusable render method that we can use.
-
-\`\`\`js
-describe('TheAccordion', () => {
-  let wrapper;
-  let vm;
-
-  const render = (props = {}) => {
-    wrapper = shallowMount(TheAccordion, {
-      attachTo: document.body,
-      propsData: { ...defaultProps(), ...props },
-    });
-    vm = wrapper.vm;
-  }
-
-  beforeEach(() => {
-    render();
-  });
-});
-\`\`\`
-
-As you can see we've now setup our suite of tests called \`TheAccordion\` all of our other tests will be children of this initial suite setup by the \`describe\` method.
-
-Let's talk about the \`render\` method. This method mounts the component, sets the wrapper and if necessary gets a refernce to the view model. This method takes a single parameter thats an object. Callers can use this parameter to specify custom options to override the default values.
-
-Notice the use of \`attachTo\` property, this is needed when using \`shallowMount\` to bind our events and to get \`isVisible\` to have the correct output. See [isVisible from the test utils docs](https://test-utils.vuejs.org/api/#isVisible).
-
-We then leverage \`beforeEach\` so we don't have to call \`render()\` within each test.
-
-### Render Testing
-
-Now that we have the base of our test file setup, lets write the first batch of tests. We will leverage \`describe\` again and build a nested suite of render tests. The rendering suite will test the rendered output of the component, ensuring that the data is fetched when it is mounted, and that the data returned is accurately displayed in the components UI.
-
-\`\`\`js
-describe('TheAccordion', () => {
-  let wrapper;
-  let vm
-
-  // ... render and beforeEach
-
-  describe('Rendering', () => {
-
-    it('renders properly', () => {
-      const group = wrapper.find('[data-test-id="accordion-group"]');
-      const sections = wrapper.findAll('.accordion');
-
-      expect(group.exists()).toBe(true);
-      expect(sections.length).toBe(3);
-    })
-
-    it('should have the correct number of panels', () => {
-      const panels = wrapper.findAll('.accordion-panel');
-      expect(panels.length).toBe(3);
-    })
-
-    it('should have the correct number of buttons', () => {
-      const buttons = wrapper.findAll('.accordion-button');
-      expect(buttons.length).toBe(3);
-    })
-
-    it('should render the correct heading element', () => {
-      render({ headingAs: 'h2' });
-
-      const headings = wrapper.findAll('h2');
-      expect(headings.length).toBe(3);
-    })
-
-    it('should render with an initial opened section', async () => {
-      render({ initialOpen: 's2' });
-
-      await vm.$nextTick();
-
-      const panels = wrapper.findAll('.accordion-panel');
-      expect(panels.at(1).isVisible()).toBe(true);
-    });
-  });
-});
-\`\`\`
-
-The tests we've just included should encompass all the rendering states of our component. It's worth noting the use of await vm.$nextTick() in the test for the initially opened section. This step is essential because it ensures we wait for the DOM to update and render the initial section as opened, guaranteeing accurate test results.
-
-You can also see how we can override default props by using the \`render\` method we setup eariler.
-
-### Behavior Testing
-
-Let's start testing the behavior of our component now. When we first start writing tests it can be hard to know what to test. A good rule to go by is we want to test the _external_ behavior of the component, _not_ the internal imlementation.
-
-This means in the following tests events are triggered and the test will verify that the actions are handled properly. We don't want to call internal method directly like \`toggleSelectedPanel\`. If the method name get changed, or the params change it could break our tests.
-
-In the test below, you'll observe multiple nested describe blocks. This organizational structure enhances the clarity and organization of our test output, making it easier to understand and debug.
-
-\`\`\`js
-// ... render tests and previous code
-
-describe('Behavior', () => {
-  let panel;
-  let button;
-
-  beforeEach(() => {
-    panel = wrapper.find('.accordion-panel');
-    button = wrapper.find('.accordion-button');
-  })
-
-  describe('Mouse Interactions', () => {
-    it('should show the panel when a button is clicked', async () => {
-      expect(panel.isVisible()).toBe(false);
-
-      await button.trigger('pointerup');
-
-      expect(panel.isVisible()).toBe(true);
-    })
-
-    it('should close an opened panel when their respective button is clicked', async () => {
-      await button.trigger('pointerup');
-
-      expect(panel.isVisible()).toBe(true);
-
-      await button.trigger('pointerup');
-
-      expect(panel.isVisible()).toBe(false);
-    })
-  })
-
-  describe('Keyboard Navigation', () => {
-    describe('Space Key', () => {
-      it('should be possible to show a panel when the Space key is pressed on the respective button', async () => {
-        expect(panel.isVisible()).toBe(false);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'Space' });
-
-        expect(panel.isVisible()).toBe(true);
-      })
-
-      it('should be possible to close an already opened panel when the Space key is pressed on the respective button', async () => {
-        await button.trigger('pointerup');
-
-        expect(panel.isVisible()).toBe(true);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'Space' });
-
-        expect(panel.isVisible()).toBe(false);
-      })
-    })
-
-    describe('Enter Key', () => {
-      it('should be possible to show a panel when the Enter key is pressed on the respective button', async () => {
-        expect(panel.isVisible()).toBe(false);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'Enter' });
-
-        expect(panel.isVisible()).toBe(true);
-      })
-
-      it('should be possible to close an already opened panel when the Enter key is pressed on the respective button', async () => {
-        await button.trigger('pointerup');
-
-        expect(panel.isVisible()).toBe(true);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'Enter' });
-
-        expect(panel.isVisible()).toBe(false);
-      })
-    })
-
-    describe('Focus Movement', () => {
-      it('should move focus to the last button when "End" is pressed', async () => {
-        const lastButton = wrapper.findAll('.accordion-button').at(2);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'End' });
-
-        expect(lastButton.element).toBe(document.activeElement);
-      })
-
-      it('should move focus to the first button when "Home" is pressed', async () => {
-        const lastButton = wrapper.findAll('.accordion-button').at(2);
-
-        await lastButton.trigger('focus');
-        await lastButton.trigger('keydown', { code: 'Home' });
-
-        expect(button.element).toBe(document.activeElement);
-      })
-
-      it('should move focus to the next button when "ArrowDown" is pressed', async () => {
-
-        const secondButton = wrapper.findAll('.accordion-button').at(1);
-
-        await button.trigger('focus');
-        await button.trigger('keydown', { code: 'ArrowDown' });
-
-        expect(secondButton.element).toBe(document.activeElement);
-      })
-
-      it('should move focus to the previous button when "ArrowUp" is pressed', async () => {
-        const secondButton = wrapper.findAll('.accordion-button').at(1);
-
-        await secondButton.trigger('focus');
-        await secondButton.trigger('keydown', { code: 'ArrowUp' });
-
-        expect(button.element).toBe(document.activeElement);
-      })
-    })
-  })
-});
-
-\`\`\`
-
-***Note the use of \`pointerup\` and \`keydown\` events in the previous tests to match the events we are binding to within the component.***
-
-### A11y Testing
-
-Finally, we need to ensure that the ARIA attributes are being properly set and contain the correct values. This ensures our component adheres to accessibility standards and provides an inclusive user experience.
-
-\`\`\`js
-// ... all our previous tests - we are nested within the behavior suite of tests
-
-  describe('a11y', () => {
-    it('should have the correct aria attributes', () => {
-      expect(button.attributes('aria-expanded')).toBe('false');
-      expect(panel.attributes('hidden')).toBeDefined();
-    })
-
-    it('should update the aria attributes when the panel is shown', async () => {
-      await button.trigger('pointerup');
-
-      expect(button.attributes('aria-expanded')).toBe('true');
-      expect(panel.attributes('hidden')).not.toBeDefined();
-    })
-  })
-\`\`\`
-
-## Conclusion
-
-With the completion of our test suite for the component, it's time to put it to the test. Let's run the suite and verify that all our tests pass without any issues!
-
-![unit test output](src/assets/unit-test-output.png)
-
-This wraps up the unit testing for \`TheAccordion\` component, and should provide a good base for setting up tests with Vitest and Vue Test Utils.
-
-[View Repo With Source](https://github.com/utroda/the-accordion)
-
-`}function T(){return i}function k(){return[{depth:2,slug:"setting-up-the-test-file",text:"Setting Up The Test File"},{depth:3,slug:"setting-up-defaults",text:"Setting up defaults"},{depth:3,slug:"render-testing",text:"Render Testing"},{depth:3,slug:"behavior-testing",text:"Behavior Testing"},{depth:3,slug:"a11y-testing",text:"A11y Testing"},{depth:2,slug:"conclusion",text:"Conclusion"}]}const V=d((a,s,p)=>{const{layout:t,...e}=g;return e.file=B,e.url=b,r`${E()}${u(i)}`});export{V as Content,T as compiledContent,V as default,B as file,g as frontmatter,k as getHeadings,m as rawContent,b as url};
+<p><a href="https://github.com/utroda/the-accordion" rel="nofollow, noopener, noreferrer" target="_blank">View Repo With Source</a></p>   </div> </article> </div> <button aria-label="Back to Top" class="z-90 fixed bottom-8 end-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 -3xl opacity-0 transition-all duration-300 hover:border-zinc-400 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 dark:bg-zinc-700 sm:end-8 sm:h-12 sm:w-12" data-show="false" id="to-top-btn"><svg aria-hidden="true" class="h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button>  </main> <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top font-semibold text-gray-600 dark:text-gray-400 sm:flex-row sm:justify-between sm:text-xs"> <div class="me-0 sm:me-4">
+&copy; Jared West 2024.<span class="inline-block">&nbsp;🚀&nbsp;Astro Cactus</span> </div> <nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500"> <a class="px-4 py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline" href="/"> Home </a><a class="px-4 py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline" href="/posts/"> Blog </a> </nav> </footer> </body></html> 
