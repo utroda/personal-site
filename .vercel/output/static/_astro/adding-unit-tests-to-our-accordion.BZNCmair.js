@@ -14,8 +14,7 @@ import { shallowMount } from '@vue/test-utils'
 
 import TheAccordion from '../TheAccordion.vue'
 \`\`\`
-At this point you might ask why choose \`shallowMount\` over \`mount\`. Shallow mounting renders only the target component, without mounting its child components. This approach helps keep tests focused and efficient, as it reduces unnecessary complexity and improves test performance. By isolating the component under test, \`shallowMount\` allows for more targeted and straightforward unit tests, resulting in clearer and more maintainable testing suites. This isn't so apparent with a single test like in our example here, but in a production enviorment where you might have hundreds of tests the speed gains will be noticable.
-
+At this point, you might ask why choose \`shallowMount\` over \`mount\`. Shallow mounting renders only the target component, without mounting its child components. This approach helps keep tests focused and efficient, as it reduces unnecessary complexity and improves test performance. By isolating the component under test, \`shallowMount\` allows for more targeted and straightforward unit tests, resulting in clearer and more maintainable testing suites. This isn't so apparent with a single test like in our example here, but in a production environment where you might have hundreds of tests, the speed gains will be noticeable.
 ### Setting up defaults
 
 \`\`\`js
@@ -28,9 +27,9 @@ const defaultProps = () => ({
 });
 \`\`\`
 
-By setting up our \`defaultProps\` as a method that returns an object, we will create a fresh copy of the \`propsData\` for each test. This allows test cases to modify a new object when nescessary to test how the component behaves for different props.
+By setting up our \`defaultProps\` as a method that returns an object, we will create a fresh copy of the \`propsData\` for each test. This allows test cases to modify a new object when necessary to test how the component behaves for different props.
 
-So now lets define our suite and setup a reusable render method that we can use.
+So now let's define our suite and set up a reusable render method that we can use.
 
 \`\`\`js
 describe('TheAccordion', () => {
@@ -51,17 +50,17 @@ describe('TheAccordion', () => {
 });
 \`\`\`
 
-As you can see we've now setup our suite of tests called \`TheAccordion\` all of our other tests will be children of this initial suite setup by the \`describe\` method.
+As you can see, we've now set up our suite of tests called \`TheAccordion\`. All of our other tests will be children of this initial suite set up by the \`describe\` method.
 
-Let's talk about the \`render\` method. This method mounts the component, sets the wrapper and if necessary gets a refernce to the view model. This method takes a single parameter thats an object. Callers can use this parameter to specify custom options to override the default values.
+Let's talk about the \`render\` method. This method mounts the component, sets the wrapper, and if necessary gets a reference to the view model. This method takes a single parameter that's an object. Callers can use this parameter to specify custom options to override the default values.
 
-Notice the use of \`attachTo\` property, this is needed when using \`shallowMount\` to bind our events and to get \`isVisible\` to have the correct output. See [isVisible from the test utils docs](https://test-utils.vuejs.org/api/#isVisible).
+Notice the use of the \`attachTo\` property; this is needed when using \`shallowMount\` to bind our events and to ensure \`isVisible\` has the correct output. See [isVisible from the test utils docs](https://test-utils.vuejs.org/api/#isVisible).
 
 We then leverage \`beforeEach\` so we don't have to call \`render()\` within each test.
 
 ### Render Testing
 
-Now that we have the base of our test file setup, lets write the first batch of tests. We will leverage \`describe\` again and build a nested suite of render tests. The rendering suite will test the rendered output of the component, ensuring that the data is fetched when it is mounted, and that the data returned is accurately displayed in the components UI.
+Now that we have the base of our test file set up, let's write the first batch of tests. We will leverage \`describe\` again and build a nested suite of render tests. The rendering suite will test the rendered output of the component, ensuring that the data is fetched when it is mounted and that the data returned is accurately displayed in the component's UI.
 
 \`\`\`js
 describe('TheAccordion', () => {
@@ -109,17 +108,17 @@ describe('TheAccordion', () => {
 });
 \`\`\`
 
-The tests we've just included should encompass all the rendering states of our component. It's worth noting the use of await vm.$nextTick() in the test for the initially opened section. This step is essential because it ensures we wait for the DOM to update and render the initial section as opened, guaranteeing accurate test results.
+The tests we've just included should encompass all the rendering states of our component. It's worth noting the use of \`await vm.$nextTick()\` in the test for the initially opened section. This step is essential because it ensures we wait for the DOM to update and render the initial section as opened, guaranteeing accurate test results.
 
-You can also see how we can override default props by using the \`render\` method we setup eariler.
+You can also see how we can override default props by using the \`render\` method we set up earlier.
 
 ### Behavior Testing
 
-Let's start testing the behavior of our component now. When we first start writing tests it can be hard to know what to test. A good rule to go by is we want to test the _external_ behavior of the component, _not_ the internal imlementation.
+Let's start testing the behavior of our component now. When we first start writing tests, it can be hard to know what to test. A good rule to go by is that we want to test the _external_ behavior of the component, _not_ the internal implementation.
 
-This means in the following tests events are triggered and the test will verify that the actions are handled properly. We don't want to call internal method directly like \`toggleSelectedPanel\`. If the method name get changed, or the params change it could break our tests.
+This means in the following tests events are triggered, and the test will verify that the actions are handled properly. We don't want to call internal methods directly like \`toggleSelectedPanel\`. If the method name gets changed, or the params change, it could break our tests.
 
-In the test below, you'll observe multiple nested describe blocks. This organizational structure enhances the clarity and organization of our test output, making it easier to understand and debug.
+In the test below, you'll observe multiple nested \`describe\` blocks. This organizational structure enhances the clarity and organization of our test output, making it easier to understand and debug.
 
 \`\`\`js
 // ... render tests and previous code
@@ -275,9 +274,8 @@ This wraps up the unit testing for \`TheAccordion\` component, and should provid
 
 [View Repo With Source](https://github.com/utroda/the-accordion)
 
-`,s={title:"Writing Unit Tests with Vue Test Utils and Vitest (Part 2)",description:"Let's add unit tests to our accordion component, using Vue Test Utils and Vitest.",publishDate:new Date(170928e7),draft:!0,tags:["vue","unit testing","testing","vue test utils","vitest"]},i={type:"content",filePath:"/Users/utroda/github/personal-site/src/content/post/adding-unit-tests-to-our-accordion.md",rawData:`
+`,s={title:"Writing Unit Tests with Vue Test Utils and Vitest (Part 2)",description:"Let's add unit tests to our accordion component, using Vue Test Utils and Vitest.",publishDate:new Date(170928e7),draft:!1,tags:["vue","unit testing","testing","vue test utils","vitest"]},i={type:"content",filePath:"/Users/utroda/github/personal-site/src/content/post/adding-unit-tests-to-our-accordion.md",rawData:`
 title: "Writing Unit Tests with Vue Test Utils and Vitest (Part 2)"
 description: "Let's add unit tests to our accordion component, using Vue Test Utils and Vitest."
 publishDate: "01 Mar 2024"
-tags: ["Vue", "Unit Testing", "Testing", "Vue Test Utils", "Vitest"]
-draft: true`};export{i as _internal,o as body,t as collection,s as data,e as id,n as slug};
+tags: ["Vue", "Unit Testing", "Testing", "Vue Test Utils", "Vitest"]`};export{i as _internal,o as body,t as collection,s as data,e as id,n as slug};
