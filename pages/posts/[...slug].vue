@@ -27,7 +27,7 @@
           <p>{{ doc.publishDate }}</p>
           <div class="divider"></div>
         </header>
-        <ContentRenderer :value="doc" />
+        <ContentRenderer :value="doc" class="slide-enter-content" />
         <div class="divider"></div>
         <NuxtLink to="/">Back to home</NuxtLink>
       </article>
