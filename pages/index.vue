@@ -1,5 +1,6 @@
 <script setup>
-  const query = { path: '/posts', sort: [{ updatedAt: 1 }] };
+  import { formatDate } from '~/utils';
+  const query = { path: '/posts', sort: [{ publishDate: -1 }] };
 </script>
 
 <template>
@@ -12,7 +13,7 @@
       v-slot="{ list }">
       <ul class="posts">
         <li v-for="post in list" :key="post._path">
-          <span class="date">{{ post.publishDate }}</span>
+          <span class="date">{{ formatDate(post.publishDate) }}</span>
           <NuxtLink :to="`posts/${post._path.split('/').pop()}`">
             {{ post.title }}
           </NuxtLink>

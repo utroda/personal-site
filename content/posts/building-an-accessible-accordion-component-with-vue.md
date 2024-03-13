@@ -1,7 +1,7 @@
 ---
 title: "Building an accessible accordion component with Vue (Part 1)"
 description: "Let's build an accessible accordion componet with Vue.js and meet the spec for W3C."
-publishDate: "27 Feb 2024"
+publishDate: 2024-02-22
 tags: ["Vue", "Accessiblity", "Component"]
 ---
 Accordions are a common UI pattern used to manage content in a collapsible and expandable manner. They are especially useful when dealing with a large amount of information that needs to be organized and presented in a structured way. However, when implementing accordions, it's crucial to ensure accessibility for all users, including those who rely on assistive technologies like screen readers or keyboard navigation. In this blog post, we'll walk through the process of creating an accessible-friendly accordion component using Vue 3, along with writing unit tests to verify its functionality in Part 2.
