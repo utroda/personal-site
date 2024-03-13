@@ -41,6 +41,5 @@ It took me minute to wrap my head around this but, in order to find the specific
 
 This project took me far from my usual tasks, but it was a fun adventure that pushed me beyond my comfort zone for a couple of nights.
 
-- [Nuxt Demo Component Source](https://github.com/utroda/personal-site/tree/main/components/content)
-- [Standlone Component Source](https://github.com/utroda/vue3-random-walk)
+- [Component Source](https://github.com/utroda/vue3-random-walk/blob/main/src/components/DemoRandomWalk.vue)
 - [p5 Insperation Demo](https://happycoding.io/tutorials/p5js/animation/random-walker)
