@@ -1,4 +1,6 @@
 <script setup>
+  import { formatDate } from '~/utils';
+
   const handleStt = () => {
     window.scrollTo({
       top: 0,
@@ -24,10 +26,10 @@
       <article class="post">
         <header class="header">
           <h1>{{ doc.title }}</h1>
-          <p>{{ doc.publishDate }}</p>
+          <p>{{ formatDate(doc.publishDate) }}</p>
           <div class="divider"></div>
         </header>
-        <ContentRenderer :value="doc" />
+        <ContentRenderer :value="doc" class="slide-enter-content" />
         <div class="divider"></div>
         <NuxtLink to="/">Back to home</NuxtLink>
       </article>

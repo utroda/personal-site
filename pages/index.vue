@@ -1,23 +1,26 @@
 <script setup>
-  const query = { path: '/posts', sort: { publishDate: 1 } };
+  import { formatDate } from '~/utils';
+  const query = { path: '/posts', sort: [{ publishDate: -1 }] };
 </script>
 
 <template>
-  <ContentDoc class="bio" path="_bio" />
-  <div class="divider"></div>
-  <h2>Posts</h2>
-  <ContentList 
-    :query="query"
-    v-slot="{ list }">
-    <ul class="posts">
-      <li v-for="post in list" :key="post._path">
-        <span class="date">{{ post.publishDate }}</span>
-        <NuxtLink :to="`posts/${post._path.split('/').pop()}`">
-          {{ post.title }}
-        </NuxtLink>
-      </li>
-    </ul>
-  </ContentList>
+  <div class="slide-enter-content">
+    <ContentDoc class="bio" path="_bio" />
+    <div class="divider"></div>
+    <h2>Posts</h2>
+    <ContentList 
+      :query="query"
+      v-slot="{ list }">
+      <ul class="posts">
+        <li v-for="post in list" :key="post._path">
+          <span class="date">{{ formatDate(post.publishDate) }}</span>
+          <NuxtLink :to="`posts/${post._path.split('/').pop()}`">
+            {{ post.title }}
+          </NuxtLink>
+        </li>
+      </ul>
+    </ContentList>
+  </div>
 </template>
 
 <style>

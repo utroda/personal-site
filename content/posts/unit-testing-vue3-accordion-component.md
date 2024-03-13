@@ -1,7 +1,7 @@
 ---
 title: "Writing Unit Tests with Vue Test Utils and Vitest (Part 2)"
 description: "Let's add unit tests to our accordion component, using Vue Test Utils and Vitest."
-publishDate: "01 Mar 2024"
+publishDate: 2024-03-02
 tags: ["Vue", "Unit Testing", "Testing", "Vue Test Utils", "Vitest"]
 ---
 

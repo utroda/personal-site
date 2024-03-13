@@ -9,7 +9,7 @@
       <span class="nav__spacer">/</span>
       <NuxtLink to="https://dribbble.com/utroda">Dribbble</NuxtLink>
     </nav>
-    <slot />
+      <slot />
   </div>
 </template>
 
