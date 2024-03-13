@@ -1,7 +1,7 @@
 ---
 title: "Experiment: Canvas Random Walk"
-description: ""
-publishDate: 2024-03-04
+description: "HTML5 Canvas random walk with Vue 3."
+publishDate: 2024-03-13
 draft: true
 tags: ["Vue", "RAF", "Canvas", "Experiment"]
 ---
