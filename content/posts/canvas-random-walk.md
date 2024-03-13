@@ -43,3 +43,5 @@ This project took me far from my usual tasks, but it was a fun adventure that pu
 
 - [Component Source](https://github.com/utroda/vue3-random-walk/blob/main/src/components/DemoRandomWalk.vue)
 - [p5 Insperation Demo](https://happycoding.io/tutorials/p5js/animation/random-walker)
+
+
