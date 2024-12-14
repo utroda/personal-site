@@ -92,8 +92,7 @@ blockquote {
 }
 
 .layout {
-  width: 100%;
-  max-width: 650px;
+  width: min(100%, 70ch);
   margin: 0 auto;
 }
 
