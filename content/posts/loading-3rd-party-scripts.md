@@ -1,7 +1,7 @@
 ---
 title: "Improve TBT with requestIdleCallback"
 description: "Using requestIdleCallback to improve total blocking time with 3rd party javascript"
-publishDate: 2024-12-30
+publishDate: 2024-12-15
 tags: ["Vue", "3rd Party Javascript", "Experiment", "Components"]
 ---
 
@@ -51,53 +51,169 @@ non-essential resources or performing background tasks.
 
 ## Lets build a Vue Componenet To Help
 
-We'll build a helper component, using a render function to add scripts to our
-site, leverage `requestIdleCallback`.
+To start, lets build a single file component, to load our 3rd party javascript,
+by using the `requestIdleCallback`.
 
-```js
-<script setup>
-    import { h } from 'vue';
+```vue
+<script>
+import { defineComponent, onMounted } from 'vue';
+
+export default defineComponent({
+  name: 'ScriptLoader',
+  props: {
+    src: {
+      type: String,
+      required: true,
+    }
+  },
+  setup(props) {
 
     const loadScript = () => {
-        const ignored = ['onLoad', 'onError'];
-        const { src, onLoad, onError } = props;
-        const el = document.createElement('script');
+      const el = document.createElement('script');
+      const ignoredAttributes = ['onLoad'];
+      const { src } = props;
 
-        const loadPromise = new Promise((resolve, reject) => {
-            el.addEventListener('load', function() {
-                resolve();
-                // Call our onLoad if its defined
-                if (props.onLoad) props.onLoad.call(this);
-            });
-            el.addEventListener('error', function() {
-                reject();
-                if (props.onError) props.onError.call(this);
-            })
-        };
+      el.src = src;
 
-        el.src = src;
-
-        for(const [key, value] of Object.entries(props)) {
-          // Skip Attributes 
-          if (ignored.includes(key)) {
-            continue;
-          }
-          const attr = key.toLowerCase();
-          el.setAttribute(attr, value);
+      // Map attrbutes to element, skip our ignore list
+      for (const [key, value] of Object.entries(props)) {
+        if (ignoredAttributes.includes(key)) {
+          continue;
         }
+        const attr = key.toLowerCase();
+        el.setAttribute(attr, value);
+      };
 
-        document.body.appendChild(el);
+      document.body.appendChild(el);
     }
 
-    const lazyWithFallback = () => {
-        if (document.readyState === 'complete') {
-          requestIdleCallback(() => loadScript(props));
-        } else {
+    const lazyLoadScript = () => {
+      if (document.readyState === 'complete') {
+        requestIdleCallback(() => loadScript());
+      } else {
+
+        const handler = () => {
+          requestIdleCallback(() => loadScript());
+          window.removeEventListener('load', handler);
         }
-    };
+
+        window.addEventListener('load', handler);
+      }
+    }
+
+    onMounted(() => {
+      lazyLoadScript();
+    });
+  }
+});
+</script>
+```
+This utility component `useScript` can now be used to load 3rd party scripts.
+
+- It will take `src` prop that specifies which script to load
+- Implements lazy loading optimizations:
+  - If the page is already loaded (`readyState === 'complete'`), it uses
+  request `requestIdleCallback` to load the script when the browser is idle.
+  - If the page is still loading, it waits for the `load` event before loading the script
+  - Cleans up the event listerns to prevent memory leaks
+- This component is "renderless" and doesn't output any visible HTML. 
+
+## Demo
+
+The demo below simulates how different script loading strategies behave during page load. It simulates loading scripts from various CDNs while adding controlled delays to clearly illustrate the timing differences. Watch as regular scripts block execution (red), async scripts load independently (green), defer scripts wait for parsing (blue), and component-loaded scripts wait for browser idle time (orange). 
+
+:DemoScriptLoader
+
+---
+
+## Improvements
+
+Let's improve this a bit, and add a caching layer that will store a promise and call the `onLoad` event in the case we have multiple components requesting the same script.
+
+```vue ins={4,21-43}
+<script>
+import { defineComponent, onMounted } from 'vue';
+
+const CacheMap = new Map();
+
+export default defineComponent({
+  name: 'ScriptLoader',
+  props: {
+    src: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+
+    const loadScript = () => {
+      const el = document.createElement('script');
+      const ignoredAttributes = ['onLoad'];
+      const { src, onLoad } = props;
+
+      if (CacheMap.has(src)) {
+        CacheMap.get(src)
+          .then(onLoad)
+          .catch(() => {
+            // If cached script failed, remove from cache and retry
+            CacheMap.delete(src);
+            loadScript();
+          });
+        return
+      }
+
+      const handleCacheLoad = new Promise((resolve, reject) => {
+        el.addEventListener('load', function(e) {
+          resolve();
+          if (onLoad) onLoad.call(this, e);
+        });
+        el.addEventListener('error', function(e) {
+          reject(e);
+        });
+      });
+
+      el.src = src;
+      CacheMap.set(src, handleCacheLoad);
+
+      // Map attrbutes to element, skip our ignore list
+      for (const [key, value] of Object.entries(props)) {
+        if (ignoredAttributes.includes(key)) {
+          continue;
+        }
+        const attr = key.toLowerCase();
+        el.setAttribute(attr, value);
+      };
+
+      document.body.appendChild(el);
+    }
+
+    const lazyLoadScript = () => {
+      if (document.readyState === 'complete') {
+        requestIdleCallback(() => loadScript());
+      } else {
+
+        const handler = () => {
+          requestIdleCallback(() => loadScript());
+          window.removeEventListener('load', handler);
+        }
+
+        window.addEventListener('load', handler);
+      }
+    }
+
+    onMounted(() => {
+      lazyLoadScript();
+    });
+  }
+});
 </script>
 ```
 
+The `CacheMap` is a global cache that stores Promises representing the loading state of external scripts. When a script is first requested, it creates a new Promise that resolves when the script loads successfully, stores this Promise in the `CacheMap` using the script's URL as the key, and then appends the script to the document. When the same script URL is requested again by another component, instead of creating and loading a duplicate script tag, it retrieves the cached Promise from the `CacheMap` and waits for it to resolve, ensuring that each external script is only loaded once no matter how many components request it.
+
 ## Conculsion 
 
+By implementing this script loader component, we gain better control over how and when external scripts load in our Vue applications. This leads to improved performance, better user experience, and cleaner code organization.
+The component's simple yet powerful approach to script loading demonstrates how we can build reusable solutions for common web development challenges while maintaining performance best practices.
 
+Remember, performance optimization is an ongoing process, and this component is just one tool in our optimization toolkit. Always measure and monitor your application's performance to ensure your optimizations are having the desired impact.
