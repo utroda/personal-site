@@ -12,7 +12,6 @@
     </nav>
     <slot />
   </div>
-  <TheDrawing />
 </template>
 
 <style scoped>
