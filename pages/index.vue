@@ -11,10 +11,12 @@ const query = { path: '/posts', sort: [{ publishDate: -1 }] };
     <ContentList :query="query" v-slot="{ list }">
       <ul class="posts">
         <li v-for="post in list" :key="post._path">
-          <span class="date">{{ formatDate(post.publishDate) }}</span>
+          <div class="date">{{ formatDate(post.publishDate) }}</div>
+          <h2>
           <NuxtLink :to="`posts/${post._path.split('/').pop()}`">
             {{ post.title }}
           </NuxtLink>
+          </h2>
         </li>
       </ul>
     </ContentList>
@@ -40,10 +42,15 @@ const query = { path: '/posts', sort: [{ publishDate: -1 }] };
 
 .posts li {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   border-bottom: 1px solid #ddd;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
+}
+
+.posts h2 {
+  font-size: 1.25rem;
+  text-align: left;
+  margin: 0;
 }
 
 .posts li:first-child {
